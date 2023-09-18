@@ -14,7 +14,6 @@ export default function Conteudo(props){
                     <img src={reactLogo} alt={reactLogoAlt} />
                     <img src={props.viteLogoProps} alt={props.viteLogoAltProps} />
                 </div>
-
             </section>
         </>
     )
