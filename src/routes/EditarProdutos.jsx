@@ -1,6 +1,4 @@
-import React from 'react'
 import { useParams } from 'react-router-dom'
-import { ListaProduto } from '../components/ListaProdutos';
 
 export default function EditarProdutos() {
 
@@ -11,7 +9,7 @@ export default function EditarProdutos() {
     //Criar uma estratégia para recuperar o produto na lista
     // Utilizando o id
     // const produtoRecuperadoPorId = ListaProduto.filter(item => item.id == parseInt(id));
-    const produtoRecuperadoPorId = ListaProduto.filter(item => item.id == parseInt(id))[0];
+    // const produtoRecuperadoPorId = ListaProduto.filter(item => item.id == parseInt(id))[0];
 
   return (
     <div>
