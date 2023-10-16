@@ -1,43 +1,63 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export default function EditarProdutos() {
 
     const {id} = useParams();
+    const navigation = useNavigate();
 
     document.title = "Editar Produtos " + id; 
 
     const[produto,setProduto] = useState({
-      
+      id:id,
+      nome:'',
+      desc:'',
+      preco:''
     });
 
     //Criar uma estratégia para recuperar o produto da API-JSON com fetch, utilizando GET:
     useEffect(()=>{
+      
       fetch(`http://localhost:5000/produtos/${id}`)
       .then((response)=> response.json())
       .then((response)=> setProduto(response))
       .catch(error=> console.log(error));
+
     },[id]);
-
+    
     const handleChange = (e)=>{
+
       //Destructuring
-      const{name,value} = e.target;
+      const {name,value} = e.target;
 
-      if(name == "nome"){
-        setProduto({[name]:value,"desc":"","preco":""});
-      }else if(name == "desc"){
-        setProduto({"nome":"",[name]:value,"preco":""});
-      }else if(name == "preco"){
-        setProduto({"nome":"","desc":"",[name]:value});
-
+      //Setando os dados diretamente no objeto atravé de SPREAD
+      setProduto({...produto,[name]:value});
+      
     }
-  }
+
+    const handleSubmit = (e) =>{
+      e.preventDefault();
+        
+        fetch(`http://localhost:5000/produtos/${id}`,{
+          method:"PUT",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body: JSON.stringify(produto)
+        })
+        .then((response)=> alert("Dados alterado com sucesso - STATUS CODE : " + response.status))
+        .catch(error=> console.log(error));
+
+        //Redirect
+        navigation("/produtos");
+
+      }
 
   return (
     <div>
         <h1>Editar Produtos</h1>
           <div>
-            <form>
+            <form onSubmit={handleSubmit}>
               <fieldset>
                 <legend>Produto Selecionado</legend>
                 <div>
@@ -62,6 +82,17 @@ export default function EditarProdutos() {
     </div>
   )
 }
+
+
+
+//2ª FORM DE INPUT COM useState
+// if(name == "nome"){
+//   setProduto({"nome":value,"desc":produto.desc,"preco":produto.preco});
+// }else if(name == "desc"){
+//   setProduto({"nome":produto.nome,"desc":value,"preco":produto.preco});
+// }else if(name == "preco"){
+//   setProduto({"nome":produto.nome,"desc":produto.desc,"preco":value});
+// }
 
 // //1ª FORMA DE INPUT COM useState
 // <form>
