@@ -8,3 +8,31 @@
     z-index: 1000;
     color: #fff;
 }
+
+form{
+    width:90%;
+    margin: 0 auto;
+}
+
+.closeModal{
+    cursor: pointer;
+    float: right;
+    font-size: 1.5rem;
+    padding: 0 0.5%;
+    color: #000;
+    background-color: #fff;
+    border-radius: 80%;
+    display: block;
+    border: 2px solid red;
+    transition: ease-in-out 300ms;
+
+    &houver{
+        background-color: red;
+        color: #fff;
+    }
+
+}
+
+div{
+    clear:both;
+}
