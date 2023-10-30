@@ -1,6 +1,10 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+
+    //criando o redirecionador 
+    const navigate = useNavigate();
 
     //USE-STATE QUE VAI ARMAZENAR OS DADOS DO FORM.
     const [usuario, setUsuario] = useState({
@@ -24,9 +28,28 @@ export default function Login() {
         try {
             const response = await fetch("http://localhost:5000/usuarios");   
             users = await response.json();
-        }catch (error) {
 
+        }catch (error) {
+            alert("Ocorreu um erro no processamento da sua solicitação!");
         }
+
+        //REALIZANDO A VALIDAÇÃO DO USUÁRIO.
+        for (let x = 0; x < users.length; x++) {
+            const user = users[x];
+            //realizando a comparação de fato!
+            if(user.email == usuario.email && user.senha == usuario.senha){
+                alert("Login realizado com sucesso!!!")
+                //redirecionando o ususario para a pagina home
+                navigate("/");
+                return;
+            }  
+        }
+
+        alert("Login ou senha incorretos!")
+        setUsuario({
+            email:"",
+            senha: ""
+        });
     }
     
     return (
@@ -34,7 +57,7 @@ export default function Login() {
             <h1>Login</h1>
     
             <div>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <fieldset>
                         <legend>User Information:</legend>
                         <div>
