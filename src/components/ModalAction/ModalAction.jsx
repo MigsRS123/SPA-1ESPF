@@ -34,14 +34,14 @@ export default function ModalAction(props) {
     const handleSubmit = (e) =>{
         e.preventDefault();
           
-          fetch(`http://localhost:5000/produtos/${id}`,{
-            method:"PUT",
+          fetch("http://localhost:5000/produtos/",{
+            method:"POST",
             headers:{
               "Content-Type":"application/json"
             },
             body: JSON.stringify(produto)
           })
-          .then((response)=> alert("Dados alterado com sucesso - STATUS CODE : " + response.status))
+          .then((response)=> console.log("Dados alterado com sucesso - STATUS CODE : " + response.status))
           .catch(error=> console.log(error));
   
           //Redirect
@@ -51,8 +51,7 @@ export default function ModalAction(props) {
 
     if(props.open){
         return(
-    <>
-    <div className="modal">
+            <div className="modal">
                 <h1>Cadastrar Produtos</h1>
                 <div>
                     <form onSubmit={handleSubmit}>
@@ -79,11 +78,6 @@ export default function ModalAction(props) {
                     </form>
                 </div>
            </div>
-        </>
         )
     }
 }
- {/* <div className="modal">
-                    <h1>Modal</h1>
-                    <button onClick={() => props.setClose(false)}>Close-Modal</button>
-                </div> */}
