@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { ListaProduto } from "../../components/ListaProdutos";
 import style from "./Produtos.module.css";
 import {AiTwotoneEdit as Editar} from "react-icons/ai"
 import { useEffect, useState } from "react";
@@ -25,7 +24,7 @@ export default function Produtos() {
   
   const [open, setOpen] = useState(false);
 
-
+  if(sessionStorage.getItem("token-user")){
   return (
     <div>
       <h1>Produtos</h1>
@@ -59,11 +58,15 @@ export default function Produtos() {
         <tfoot>
           <tr>
             <td colSpan={5}>
-              PRODUTOS INFORMÁTICOS - QTD = {ListaProduto.length}
+              PRODUTOS INFORMÁTICOS - QTD = {listaProdutosApi.length}
             </td>
           </tr>
         </tfoot>
       </table>
     </div>
   );
+          }else{
+            window.location = "/login";
+            
+          }
 }
