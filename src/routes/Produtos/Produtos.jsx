@@ -31,7 +31,7 @@ export default function Produtos() {
 
       <ModalAction open={open} setClose={setOpen}/>
 
-      <button onClick={()=> setOpen(true)}>OPEN-MODAL</button>
+      <button className={style.btnInsProd} onClick={()=> setOpen(true)}>INSERIR PRODUTO</button>
 
       <table className={style.tblEstilo}>
         <thead>

@@ -6,7 +6,7 @@ export default function Cabecalho() {
   const rotaAtual = useLocation();
   const navigate = useNavigate();
 
-  const objUser = JSON.parse(sessionStorage.getItem("data-user"));
+  const obJUser = JSON.parse(sessionStorage.getItem("data-user"));
 
   const handleLogout = ()=>{
     sessionStorage.removeItem("token-user");
@@ -14,17 +14,12 @@ export default function Cabecalho() {
     navigate("/login");
   }
 
-
-  
   return (
     <>
       <header className="cabecalho">
+
         <div>
-          <p>{objUser.email}</p>
-          <p>{objUser.name}</p>
-        </div>
-        <div>
-          <button onClick={handleLogout} className={sessionStorage.getItem("token-user") ? "btnLogout":"btn"}>LogOut</button>
+          <button onClick={handleLogout} className={sessionStorage.getItem("token-user") ? "btnLogout":"btn"}>Logout</button>
         </div>
         <nav>
           <ul>
@@ -33,6 +28,10 @@ export default function Cabecalho() {
             <li><Link to="/produtos" className={rotaAtual.pathname == "/produtos" ? "active" : ""}>Produtos</Link> </li>
           </ul>
         </nav>
+        <div className="welcome">
+          <p>{obJUser != null ?  `Olá ${obJUser.name}`:""}</p>
+          <p>{obJUser != null ?  obJUser.email :""}</p>
+        </div>
       </header>
     </>
   );

@@ -9,6 +9,7 @@ import Produtos from './routes/Produtos/Produtos.jsx';
 import EditarProdutos from './routes/EditarProdutos.jsx';
 import Login from './routes/Login/Login.jsx';
 import Erro404 from './routes/Erro404.jsx';
+import Cadastro from './routes/Cadastro/Cadastro.jsx';
 //BLOCO DAS ROTAS
 
 const router = createBrowserRouter([
@@ -17,13 +18,14 @@ const router = createBrowserRouter([
     {path:"/", element:<Home/>},
     {path:"/produtos",element:<Produtos/>},
     {path:"/editar/produtos/:id",element:<EditarProdutos/>},
-    {path:"/login", element:<Login/>},
-   ]
+    {path:"/login",element:<Login/>},
+    {path:"/cadastrar",element:<Cadastro/>},
+   ] 
  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  
+ 
     <RouterProvider router={router}/>
   
 )
